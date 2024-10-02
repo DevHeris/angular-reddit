@@ -8,8 +8,6 @@ import { Article } from './article/article.model';
 })
 export class AppComponent {
   articles: Array<Article>;
-  // or
-  // articles: Article[];
 
   constructor() {
     this.articles = [
@@ -19,10 +17,17 @@ export class AppComponent {
     ];
   }
 
+  sortedArticles(): Article[] {
+    return this.articles.sort((a: Article, b: Article) => b.votes - a.votes);
+  }
+
   addArticle(title: HTMLInputElement, link?: HTMLInputElement): boolean {
     console.log(`Adding article title: ${title.value} and link: ${link.value}`);
 
     this.articles.push(new Article(title.value, link.value));
+
+    title.value = '';
+    link.value = '';
 
     // returning false prevents the default behavior of the form. Same function as e.preventDefault()
     return false;

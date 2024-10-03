@@ -1,0 +1,11 @@
+<div class="ui items">
+  <app-product-row
+    *ngFor="let myProduct of productList"
+    [product]="myProduct"
+    (click)="clicked(myProduct)"
+    [class.selected]="isSelected(myProduct)"
+  >
+    <!--     [class.selected]="isSelected(myProduct)"
+ means add the class 'selected if isSelected() returns true.' -->
+  </app-product-row>
+</div>

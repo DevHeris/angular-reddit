@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Article } from './article/article.model';
+import { Product } from './product.model';
 
 @Component({
   selector: 'app-root',
@@ -7,29 +7,36 @@ import { Article } from './article/article.model';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  articles: Array<Article>;
+  products: Product[];
 
   constructor() {
-    this.articles = [
-      new Article('Angular', 'http://angular.io', 3),
-      new Article('Fullstack', 'http://fullstack.io', 2),
-      new Article('Angular Homepage', 'http://angular.io', 1),
+    this.products = [
+      new Product(
+        'MYSHOES',
+        'Black Running Shoes',
+        '/assets/images/products/black-shoes.jpg',
+        ['Men', 'Shoes', 'Running Shoes'],
+        109.99
+      ),
+      new Product(
+        'NEATOJACKET',
+        'Blue Jacket',
+        '/assets/images/products/blue-jacket.jpg',
+        ['Women', 'Apparel', 'Jackets & Vests'],
+        238.99
+      ),
+      new Product(
+        'NICEHAT',
+        'A Nice Black Hat',
+        '/assets/images/products/black-hat.jpg',
+        ['Men', 'Accessories', 'Hats'],
+        29.99
+      ),
     ];
   }
 
-  sortedArticles(): Article[] {
-    return this.articles.sort((a: Article, b: Article) => b.votes - a.votes);
-  }
-
-  addArticle(title: HTMLInputElement, link?: HTMLInputElement): boolean {
-    console.log(`Adding article title: ${title.value} and link: ${link.value}`);
-
-    this.articles.push(new Article(title.value, link.value));
-
-    title.value = '';
-    link.value = '';
-
-    // returning false prevents the default behavior of the form. Same function as e.preventDefault()
-    return false;
+  productWasSelected(product: Product) {
+    console.log(product);
+    console.log(`Product clicked: `, product);
   }
 }
